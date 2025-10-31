@@ -21,14 +21,7 @@ java -Xmx12288M -Xms12288M -jar paper.jar nogui
 
 
 
-
-
-
-
-
-
--- use playit plugin for port falwarding
-if that didnt work youu can use ngrok
+-- port falwarding
 steps
 requirements have a ngrok account
 Port Forwarding:
