@@ -1,0 +1,25 @@
+cd /workspaces/server || exit
+
+while true; do
+    git add .
+
+    if git show HEAD:minecraft_server/plugins/DiscordSRV/config.yml >/dev/null 2>&1; then
+        OLD_LINE9=$(git show HEAD:minecraft_server/plugins/DiscordSRV/config.yml | sed -n '9p')
+
+        # Replace current line 9 with the old one
+        awk -v old="$OLD_LINE9" 'NR==9{$0=old} {print}' \
+            minecraft_server/plugins/DiscordSRV/config.yml > tmpfile && mv tmpfile minecraft_server/plugins/DiscordSRV/config.yml
+
+        git add minecraft_server/plugins/DiscordSRV/config.yml
+    fi
+
+    git commit -m "Auto-save: $(date '+%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
+    git push origin main
+
+    SLEEP_TIME=$((200 + RANDOM % 50))
+    echo "Next auto-commit in $SLEEP_TIME seconds..."
+    sleep $SLEEP_TIME
+done
+# commands
+# chmod +x auto_commit.sh
+# ./auto_commit.sh
