@@ -1,0 +1,32 @@
+# New Player Welcome & Daily Rewards Script
+# Requires Vault and an economy plugin like EssentialsX
+
+options:
+    welcome-amount: 200
+    daily-amount: 50
+
+on join:
+    if {firstjoin::%player%} is not set:
+        # New player - give welcome bonus
+        set {firstjoin::%player%} to now
+        add {@welcome-amount} to player's balance
+        send "&aWelcome, new player! You've received &e{@welcome-amount} &acoins as a starting bonus!" to player
+    
+    # Check for daily reward for all players
+    set {_today} to now formatted as "yyyy-MM-dd"
+    if {lastlogin::%player%} is not set:
+        add {@daily-amount} to player's balance
+        set {lastlogin::%player%} to now
+        send "&aDaily login reward! You've received &e{@daily-amount} &acoins for logging in today!" to player
+    else:
+        set {_last} to {lastlogin::%player%} formatted as "yyyy-MM-dd"
+        if {_last} != {_today}:
+            add {@daily-amount} to player's balance
+            set {lastlogin::%player%} to now
+            send "&aDaily login reward! You've received &e{@daily-amount} &acoins for logging in today!" to player
+        else:
+            # Optional: notify if already claimed today
+            send "&7You've already claimed today's daily reward. Come back tomorrow!" to player
+
+# Note: This treats players joining after script load as new (no {firstjoin} variable).
+# Reload with /sk reload <filename> after saving to plugins/Skript/scripts/

@@ -18,3 +18,26 @@ wget "https://fill-data.papermc.io/v1/objects/8de7c52c3b02403503d16fac58003f1efe
 run this command to start server
 cd minecraft_server
 java -Xmx12288M -Xms12288M -jar paper.jar nogui
+
+
+
+
+
+
+
+
+
+-- use playit plugin for port falwarding
+if that didnt work youu can use ngrok
+steps
+requirements have a ngrok account
+Port Forwarding:
+
+
+wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
+
+tar -xvzf ngrok-v3-stable-linux-amd64.tgz
+
+./ngrok authtoken “yourtoken”
+
+./ngrok tcp 25565

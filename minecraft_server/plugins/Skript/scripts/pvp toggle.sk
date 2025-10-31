@@ -1,0 +1,27 @@
+# PVP Toggle Script
+# Players can only toggle their own PVP. 
+# When off: immune to player damage and can't damage other players. Mobs unaffected.
+
+command /pvp:
+    permission: pvp.toggle
+    permission message: "&cYou don't have permission to use this command!"
+    trigger:
+        if {pvp::%player%} is not set:
+            set {pvp::%player%} to true # Default to PVP ON
+        if {pvp::%player%} is true:
+            set {pvp::%player%} to false
+            send "&cPVP disabled! You're now safe from player attacks (mobs still hurt)." to player
+        else:
+            set {pvp::%player%} to true
+            send "&aPVP enabled! You can now fight other players." to player
+        send "&eYour PVP is now %{pvp::%player%}%." to player
+
+on damage:
+    if victim is a player:
+        if attacker is a player:
+            if {pvp::%victim%} is false:
+                cancel event
+                send "&cThat player has PVP disabled!" to attacker
+            else if {pvp::%attacker%} is false:
+                cancel event
+                send "&cYou have PVP disabled, so you can't attack players!" to attacker
