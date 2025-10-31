@@ -1,0 +1,20 @@
+this is a totorial on how to make it
+https://www.youtube.com/watch?v=uQj99W1Ul9U
+
+-- commands to do to set up server
+
+sudo apt update
+sudo apt upgrade
+sudo apt install openjdk-17-jdk
+mkdir minecraft_server
+cd minecraft_server
+wget "server code "
+
+
+
+
+-- starting server after set up
+run this command to start server
+cd minecraft_server
+java -Xmx12288M -Xms12288M -jar paper.jar nogui
+
