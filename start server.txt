@@ -5,7 +5,8 @@ https://www.youtube.com/watch?v=uQj99W1Ul9U
 
 sudo apt update
 sudo apt upgrade
-sudo apt install openjdk-17-jdk
+sudo apt install openjdk-21-jdk
+
 mkdir minecraft_server
 cd minecraft_server
 wget "server code "
